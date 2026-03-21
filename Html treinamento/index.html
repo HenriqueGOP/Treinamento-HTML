@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treinamento HTML</title>
+</head>
+<body>
+    <header>
+        <h1>Sejam bem-vindos ao meu site!</h1>
+        <p>aqui faremos um pequeno quiz conhecimento em <b>linguagem de programação</b>, espero que gostem!</p>
+    </header>
+    
+    <!--introdução-->
+    <main>
+        <section>
+            <h2>Sobre o quiz</h2>
+            <p><strong>Esse quiz</strong> foi desenvolvido para testar seu conhecimento em <em>linguagem de programação</em>, conceitos básicos 
+                e muitas outras coisas <br>Desafie-se com esse quiz!!</p>
+            <p>Você poderá encontrar alguns acrônimos como <abbr title="HyperText Markup Language">Html</abbr> e <abbr title="Cascading Style Sheets">CSS3</abbr>,<br> que são comumente usado em questões relacionadas a desenvolvimento
+                web, mas não se preocupe, o quiz é para testar seu conhecimento geral em linguagem de programação,<br> então mesmo que você não saiba o que é Html ou CSS3, você ainda pode tentar responder as questões e aprender algo novo!</p>
+        </section>
+        <!--Pergunta 1 - Input: Radio (múltipla escolha com uma resposta)-->
+        <section>   
+            <h2>Qual linguagem é usada para estruturar páginas web?</h2>
+            <form>
+            <input type="radio" value="Python" id="p1a" name="pergunta1">
+            <label for="p1a">Python</label>
+            <input type="radio" value="JavaScript" id="p1b" name="pergunta1">
+            <label for="p1b">JavaScript</label>
+            <input type="radio" value="HTML" id="p1c" name="pergunta1">
+            <label for="p1c">HTML</label>
+            <input type="radio" value="CSS" id="p1d" name="pergunta1">
+            <label for="p1d">CSS</label>
+            <input type="radio" value="JAVA" id="p1e" name="pergunta1">
+            <label for="p1e">JAVA</label>
+            </form>
+        </section>
+        <!--Pergunta 2 - Input: Text (texto livre)-->
+        <section>
+            <h2>Pergunta 2: Na URL https://www.google.com, o trecho "google.com" é o? _______</h2>
+            <form>
+            <input type="text" id="p2" name="pergunta2" placeholder="Digite sua resposta...">
+            </form>
+        </section>
+        <!--Pergunta 3 - Input: Password (entrada de senha)-->
+        <section>
+            <h2>Pergunta 3: Escreva o exemplo de uma senha forte</h2>
+            <form>
+            <input type="password" id="p3" name="pergunta3" placeholder="Digite uma senha...">   
+            </form>
+        </section>
+        <!--Pergunta 4 - Input: Date (seletor de data)-->
+        <section>
+            <h2>Pergunta 4: Em qual data a hatsune miku foi lançada no fortnite?</h2>
+            <form>
+                <input type="date" id="p4" name="pergunta4">
+            </form>
+        </section>
+        <!--Pergunta 5 - Input: Checkbox (múltiplas opções com várias respostas possíveis)-->
+        <section>
+            <h2>Quais dessas tecnologias são consideradas linguagens de progamação?</h2>
+            <form>
+            <input type="checkbox" id="p5a" name="pergunta5" value="Python">
+            <label for="p5a">Python</label>
+            <input type="checkbox" id="p5b" name="pergunta5" value="JavaScript">
+            <label for="p5b">JavaScript</label>
+            <input type="checkbox" id="p5c" name="pergunta5" value="HTML">
+            <label for="p5c">HTML</label>
+            <input type="checkbox" id="p5d" name="pergunta5" value="CSS">
+            <label for="p5d">CSS</label>
+            </form>
+        </section>
+        <!--Pergunta 6-->
+        <section>
+            <h2>Faça o upload de um arquivo contendo um codigo html</h2>
+            <form>
+                <input type="file" id="p6" name="pergunta6" accept=".html">
+            </form>
+        </section>
+        <!--Pergunta 7 Menu suspenso-->
+        <section>
+            <h2>Pergunta 7: selecione o atribute de input que define seu tipo:</h2>
+            <form>
+            <select id="p7" name="pergunta7">
+                <option value="">Selecione uma opção</option>
+                <option value="type">type</option>
+                <option value="name">name</option>
+                <option value="id">id</option>
+                <option value="value">value</option>
+            </select>
+            </form>
+        </section>
+        <!--Pergunta 8 - Imagens-->
+        <section>
+            <h2>Pergunta 8: qual linguagem de progamação é representada pelo logo abaixo?</h2>
+            <figure>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/1200px-Python-logo-notext.svg.png" alt="Logo da linguagem Python" width="100">
+                <figcaption>"Dica: é uma linguagem de programação muito popular e fácil de aprender!"</figcaption>
+            </figure>
+            <form>
+                <input type="text" id="p8" name="pergunta8" placeholder="Digite sua resposta...">
+            </form>
+        </section>
+        <!--Pergunta 9 - Input: Number (entrada numérica)-->
+        <section>
+            <h2>Pergunta 9: Quantos anos você tem de experiência em programação?</h2>
+            <form>
+            <input type="number" id="p9" name="pergunta9" min="0" max="50" placeholder="Digite um número...">
+            </form>
+        </section>
+        <!--Pergunta 10 - Input: Email (validação de email)-->
+        <section>
+            <h2>Pergunta 10: Qual é o seu email para contato?</h2>
+            <form>
+            <input type="email" id="p10" name="pergunta10" placeholder="seu@email.com">
+            </form>
+        </section>
+        <!--Pergunta 11 - Input: Range (slider)-->
+        <section>
+            <h2>Pergunta 11: Em uma escala de 1 a 10, quão difícil foi este quiz?</h2>
+            <form>
+            <input type="range" id="p11" name="pergunta11" min="1" max="10" value="5">
+            <label for="p11">Dificuldade: <span id="rangeValue">5</span>/10</label>
+            </form>
+        </section>
+        <!--Pergunta 12 - Textarea (texto longo)-->
+        <section>
+            <h2>Pergunta 12: Descreva brevemente o que você aprendeu neste quiz</h2>
+            <form>
+            <textarea id="p12" name="pergunta12" rows="4" cols="50" placeholder="Digite sua resposta aqui..."></textarea>
+            </form>
+        </section>
+        <!--Pergunta 13 - Input: URL (validação de URL)-->
+        <section>
+            <h2>Pergunta 13: Qual é o link do seu portfólio ou site pessoal?</h2>
+            <form>
+            <input type="url" id="p13" name="pergunta13" placeholder="https://exemplo.com">
+            </form>
+        </section>
+
+        <!--Pergunta 14 - Input: Color (seletor de cor)-->
+        <section>
+            <h2>Pergunta 14: Escolha a cor que você acha que representa melhor a programação</h2>
+            <form>
+            <input type="color" id="p14" name="pergunta14" value="#0000ff">
+            </form>
+        </section>
+        <!--Pergunta 15 - Input: Time (seletor de hora)-->
+        <section>
+            <h2>Pergunta 15: Qual é o melhor horário para você programar?</h2>
+            <form>
+            <input type="time" id="p15" name="pergunta15">
+            </form>
+        </section>
+        <!--Pergunta 16 - Input: Month (seletor de mês)-->
+        <section>
+            <h2>Pergunta 16: Em qual mês você começou a aprender programação?</h2>
+            <form>
+            <input type="month" id="p16" name="pergunta16">
+            </form>
+        </section>
+        <!--Pergunta 17 - Input: Week (seletor de semana)-->
+        <section>
+            <h2>Pergunta 17: Em qual semana do ano você começou a aprender programação?</h2>
+            <form>
+            <input type="week" id="p17" name="pergunta17">
+            </form>
+        </section>
+        <!--Pontuação-->
+        <h2>Pontuação </h2>
+        <section>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Pontuação</th>
+                        <th>Avaliação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0-2</td>
+                        <td>Iniciante</td>
+                    </tr>
+                    <tr>
+                        <td>2-5</td>
+                        <td>Intermediário</td>
+                    </tr>
+                    <tr>
+                        <td>5-10</td>
+                        <td>Avançado</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">Estudem Sempre</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+        <!--Lista de Respostas-->
+        <h2>Verifique suas Respostas</h2>
+        <details>
+        <summary>Clique para ver as respostas corretas</summary>
+        <ol>
+            <li>Pergunta 1: HTML</li>
+            <li>Pergunta 2: Domínio</li>
+            <li>Pergunta 3: Exemplo de senha forte: "P@ssw0rd!"</li>
+            <li>Pergunta 4: 16 de fevereiro de 2024</li>
+            <li>Pergunta 5: Python e JavaScript</li>
+            <li>Pergunta 6: (Depende do arquivo enviado)</li>
+            <li>Pergunta 7: type</li>
+            <li>Pergunta 8: Python</li>
+            <li>Pergunta 9: (Depende da resposta do usuário)</li>
+            <li>Pergunta 10: (Depende da resposta do usuário)</li>
+            <li>Pergunta 11: (Depende da resposta do usuário)</li>
+            <li>Pergunta 12: (Depende da resposta do usuário)</li>
+            <li>Pergunta 13: (Depende da resposta do usuário)</li>
+            <li>Pergunta 14: (Depende da resposta do usuário)</li>
+            <li>Pergunta 15: (Depende da resposta do usuário)</li>
+            <li>Pergunta 16: (Depende da resposta do usuário)</li>
+            <li>Pergunta 17: (Depende da resposta do usuário)</li>
+        </ol>
+        </details>
+        <!--Formulario de Feedback-->
+        <section>
+
+        <h2>Deixe seu Feedback</h2>
+        <fieldset>
+            <legend>Informações de contato</legend>
+        <form>
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" placeholder="Seu nome..."><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="Seu email..."><br>
+            <label for="comments">Comentarios:</label><br>
+            <textarea id="comments" name="comments" placeholder="Seus comentarios..." rows="4" cols="50"></textarea><br>
+            <input type="submit" value="Enviar Feedback">
+
+        </form>
+        </fieldset>
+        </section>
+        
+    </main>
+    <footer>
+        <p>&copy; 2026 Treinamento HTML. Todos os direitos reservados.</p>
+        <p>Para conhecer outros quizzes <a href="https://google.com" target="_blank">clique aqui</a></p> 
+    </footer>
+</body>
+</html>
