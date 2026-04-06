@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de CSS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code&family=Nunito:wght@400;700;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: #0f1117;
+            color: #e0e0e0;
+            line-height: 1.7;
+        }
+
+        nav {
+            background: #080b10;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid #00d4ff;
+        }
+        nav .brand {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            color: #fff;
+            font-size: 1rem;
+            padding: 1rem 0;
+            flex: 1;
+            letter-spacing: 0.05em;
+        }
+        nav .brand span { color: #00d4ff; }
+        .nav-links { display: flex; gap: 0.5rem; }
+        .nav-links a {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-decoration: none;
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            transition: 0.2s;
+            letter-spacing: 0.04em;
+        }
+        .nav-links a.active { background: #00d4ff; color: #080b10; border-color: #00d4ff; }
+        .nav-links a.link-html { color: #c0392b; border-color: #c0392b44; }
+        .nav-links a.link-html:hover { background: #c0392b22; }
+        .nav-links a.link-quiz { color: #f0a500; border-color: #f0a50044; }
+        .nav-links a.link-quiz:hover { background: #f0a50022; }
+
+        header {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-bottom: 3px solid #00d4ff;
+        }
+
+        header h1 { font-size: 2.2rem; color: #00d4ff; font-weight: 900; }
+        header p  { color: #aaa; margin-top: 0.5rem; font-size: 1.05rem; }
+
+        main {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        /* === Bloco de tópico === */
+        .topico {
+            background: #1a1d27;
+            border-radius: 12px;
+            padding: 2rem;
+            border-left: 5px solid #00d4ff;
+        }
+
+        .topico h2 {
+            color: #00d4ff;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #2a2d3a;
+        }
+
+        .topico h3 {
+            color: #f0a500;
+            font-size: 1.05rem;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .topico p { margin-bottom: 0.8rem; color: #ccc; }
+        .topico ul, .topico ol { padding-left: 1.5rem; color: #ccc; }
+        .topico li { margin-bottom: 0.4rem; }
+
+        /* === Bloco de código === */
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #2a2d3a;
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.88rem;
+            color: #c9d1d9;
+            overflow-x: auto;
+            white-space: pre;
+        }
+
+        .keyword  { color: #ff7b72; }
+        .property { color: #79c0ff; }
+        .value    { color: #a5d6ff; }
+        .comment  { color: #6e7681; font-style: italic; }
+        .selector { color: #d2a8ff; }
+        .string   { color: #a5d6ff; }
+
+        /* === Badge de destaque === */
+        .badge {
+            display: inline-block;
+            background: #00d4ff22;
+            color: #00d4ff;
+            border: 1px solid #00d4ff55;
+            border-radius: 6px;
+            padding: 0.15rem 0.6rem;
+            font-size: 0.82rem;
+            font-family: 'Fira Code', monospace;
+            margin: 0 2px;
+        }
+
+        .badge.orange { background: #f0a50022; color: #f0a500; border-color: #f0a50055; }
+        .badge.green  { background: #3fb95022; color: #3fb950; border-color: #3fb95055; }
+
+        /* === Aviso / dica === */
+        .dica {
+            background: #f0a50015;
+            border: 1px solid #f0a50044;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin-top: 1rem;
+            color: #f0c850;
+            font-size: 0.93rem;
+        }
+        .dica strong { color: #f0a500; }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #444;
+            font-size: 0.85rem;
+            border-top: 1px solid #1e2030;
+        }
+
+        /* ── RESULTADO VISUAL (EXEMPLOS PRÁTICOS) ── */
+        .resultado-visual {
+            background: #ffffff; /* Fundo branco para simular a página limpa */
+            border: 1px solid #2a2d3a;
+            border-left: 4px solid #f0a500; /* Laranja para combinar com o tema CSS */
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1.5rem 0 0 0;
+            font-family: Arial, sans-serif; /* Fonte padrão limpa */
+            color: #333; /* Texto escuro para contrastar no fundo branco */
+            line-height: 1.5;
+        }
+
+        .resultado-visual::before {
+            content: "👁️ Como fica na tela:";
+            display: block;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: #f0a500;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="brand">📄 Guias de <span>Web Dev</span></div>
+    <div class="nav-links">
+        <a href="guia_html.html" class="link-html">HTML</a>
+        <a href="guia_css.html" class="active">CSS</a>
+        <a href="index.html" class="link-quiz">Quiz</a>
+    </div>
+</nav>
+
+<header>
+    <h1>📘 Guia de CSS</h1>
+    <p>Do zero ao seu código — explicado em português</p>
+</header>
+
+<main>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 0 — O QUE É CSS -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>0. O que é CSS e para que serve?</h2>
+
+        <p>Se o HTML é o esqueleto de uma página web (estrutura e conteúdo), o <strong>CSS</strong> é a roupa e a maquiagem — ele define como tudo vai aparecer na tela.</p>
+        <p><strong>CSS</strong> significa <em>Cascading Style Sheets</em> (Folhas de Estilo em Cascata). Com ele você controla cores, tamanhos, fontes, espaçamentos, posicionamento, animações e muito mais.</p>
+
+        <h3>Como usar o CSS?</h3>
+        <p>Existem três formas de aplicar CSS em um HTML:</p>
+
+        <p><strong>1. CSS externo</strong> (recomendado) — você cria um arquivo separado com extensão <span class="badge">.css</span> e o linkeia no HTML dentro do <span class="badge">&lt;head&gt;</span>:</p>
+        <div class="code-block"><span class="keyword">&lt;link</span> <span class="property">rel</span>=<span class="string">"stylesheet"</span> <span class="property">href</span>=<span class="string">"estilo.css"</span><span class="keyword">&gt;</span></div>
+
+        <p><strong>2. CSS interno</strong> — você escreve o CSS dentro de uma tag <span class="badge">&lt;style&gt;</span> no <span class="badge">&lt;head&gt;</span> do próprio HTML:</p>
+        <div class="code-block"><span class="keyword">&lt;style&gt;</span>
+  <span class="selector">body</span> { <span class="property">background-color</span>: <span class="value">blue</span>; }
+<span class="keyword">&lt;/style&gt;</span></div>
+
+        <p><strong>3. CSS inline</strong> — você escreve o estilo diretamente na tag HTML com o atributo <span class="badge">style</span>. Pouco recomendado:</p>
+        <div class="code-block"><span class="keyword">&lt;p</span> <span class="property">style</span>=<span class="string">"color: red;"</span><span class="keyword">&gt;</span>Texto vermelho<span class="keyword">&lt;/p&gt;</span></div>
+
+        <h3>Sintaxe básica do CSS</h3>
+        <p>O CSS é escrito em blocos chamados <strong>regras</strong>. Cada regra tem um <strong>seletor</strong> (quem vai ser estilizado) e uma ou mais <strong>declarações</strong> (o que vai mudar):</p>
+        <div class="code-block"><span class="selector">seletor</span> {
+    <span class="property">propriedade</span>: <span class="value">valor</span>;
+    <span class="property">outra-propriedade</span>: <span class="value">outro-valor</span>;
+}</div>
+
+        <p>Os comentários no CSS são escritos com <span class="badge">/* texto */</span> e não aparecem na página.</p>
+    </div>
+
+    <div class="resultado-visual">
+            <p style="color: red; font-size: 1.2rem; margin: 0;">Texto vermelho criado com CSS!</p>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 1 — @import -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>1. <span class="badge">@import</span> — Importando fontes externas</h2>
+
+        <div class="code-block"><span class="keyword">@import</span> <span class="value">url</span>(<span class="string">'https://fonts.googleapis.com/css2?family=Trispace&display=swap'</span>);</div>
+
+        <p>O <span class="badge">@import</span> importa um recurso externo para dentro do CSS — nesse caso, uma fonte do Google Fonts. Sem isso, você só pode usar as fontes já instaladas no computador do usuário.</p>
+        <p>Depois de importar, você usa a fonte pelo nome dentro da propriedade <span class="badge">font-family</span>:</p>
+        <div class="code-block"><span class="selector">body</span> {
+    <span class="property">font-family</span>: <span class="value">"Trispace"</span>, sans-serif;
+}</div>
+        <p>O <span class="badge">sans-serif</span> após a vírgula é a fonte de <strong>fallback</strong> (reserva): se a Trispace não carregar, o navegador usa qualquer fonte sans-serif disponível.</p>
+    </div>
+
+    <div class="resultado-visual">
+            <p style="font-family: 'Courier New', Courier, monospace; font-size: 1.1rem; margin: 0;">Este texto usa uma fonte diferente importada (simulada aqui com Courier) em vez da fonte padrão.</p>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 2 — Seletor Universal * -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>2. Seletor Universal <span class="badge">*</span></h2>
+
+        <div class="code-block"><span class="selector">*</span> {
+    <span class="property">margin</span>: <span class="value">0</span>;
+    <span class="property">padding</span>: <span class="value">0</span>;
+    <span class="property">box-sizing</span>: <span class="value">border-box</span>;
+}</div>
+
+        <p>O asterisco <span class="badge">*</span> seleciona <strong>todos os elementos</strong> da página de uma só vez. É o seletor mais abrangente do CSS.</p>
+
+        <h3>margin e padding</h3>
+        <p>Todos os elementos HTML têm margens e preenchimentos internos que o navegador coloca por padrão. Isso pode causar espaços indesejados. Zerando com <span class="badge">margin: 0</span> e <span class="badge">padding: 0</span>, você parte do zero e controla tudo manualmente.</p>
+        <ul>
+            <li><strong>margin</strong> — espaço do lado de <em>fora</em> do elemento (entre ele e os vizinhos)</li>
+            <li><strong>padding</strong> — espaço do lado de <em>dentro</em> do elemento (entre a borda e o conteúdo)</li>
+        </ul>
+
+        <h3>box-sizing: border-box</h3>
+        <p>Por padrão, quando você define <span class="badge">width: 200px</span>, o padding e a borda são somados por cima, tornando o elemento maior que 200px. Com <span class="badge">box-sizing: border-box</span>, o padding e a borda já são incluídos dentro do tamanho definido — o que torna os cálculos muito mais previsíveis.</p>
+
+        <div class="dica"><strong>💡 Dica:</strong> Esse bloco <span class="badge">* { margin: 0; padding: 0; box-sizing: border-box; }</span> é chamado de <strong>CSS Reset</strong> e praticamente todo projeto profissional começa com ele.</div>
+    </div>
+
+    <div class="resultado-visual">
+            <div style="background: #e0e0e0; padding: 20px; border: 3px solid #f0a500; box-sizing: border-box; width: 100%; text-align: center;">
+                <strong>box-sizing: border-box</strong><br>
+                O padding verde (interno) e a borda laranja não aumentam o tamanho final desta caixa. Tudo se encaixa perfeitamente.
+            </div>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 3 — Propriedades do body -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>3. Propriedades do <span class="badge">body</span></h2>
+
+        <div class="code-block"><span class="selector">body</span> {
+    <span class="property">background-color</span>: <span class="value">rgb(185, 89, 230)</span>;
+    <span class="property">font-family</span>: <span class="value">"Trispace"</span>, sans-serif;
+    <span class="property">color</span>: <span class="value">#1a1a1a</span>;
+    <span class="property">line-height</span>: <span class="value">1.6</span>;
+}</div>
+
+        <h3>Cores: rgb() e #hex</h3>
+        <p>No CSS existem várias formas de escrever uma cor:</p>
+        <ul>
+            <li><span class="badge">rgb(185, 89, 230)</span> — define a cor pelos canais Red, Green e Blue, cada um de 0 a 255</li>
+            <li><span class="badge">#1a1a1a</span> — formato hexadecimal, muito comum. Cada par de letras/números representa R, G e B em base 16</li>
+            <li><span class="badge">white</span>, <span class="badge">pink</span>, <span class="badge">blue</span> — nomes de cores em inglês, direto no código</li>
+        </ul>
+
+        <h3>line-height</h3>
+        <p>Define a altura de cada linha de texto. O valor <span class="badge">1.6</span> significa 1,6× o tamanho da fonte atual. Aumentar o <span class="badge">line-height</span> deixa o texto mais arejado e fácil de ler.</p>
+    </div>
+
+    <div class="resultado-visual" style="background-color: rgb(185, 89, 230); color: #1a1a1a; padding: 20px; border-radius: 8px; line-height: 1.6;">
+            <strong>Simulação do Body Roxo:</strong><br>
+            A cor de fundo foi alterada usando rgb(). O texto ficou escuro e o espaçamento entre esta linha<br>
+            e a linha de cima está maior por causa do line-height: 1.6.
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 4 — Box model: padding, border, box-shadow -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>4. Espaçamento e Sombra</h2>
+
+        <div class="code-block"><span class="selector">header</span> {
+    <span class="property">padding</span>: <span class="value">3rem 1rem</span>;
+    <span class="property">text-align</span>: <span class="value">center</span>;
+    <span class="property">box-shadow</span>: <span class="value">0 4px 10px rgba(0,0,0,0.2)</span>;
+}</div>
+
+        <h3>padding com dois valores</h3>
+        <p>Quando você usa dois valores no <span class="badge">padding</span>, o primeiro se aplica ao topo/baixo e o segundo à esquerda/direita:</p>
+        <div class="code-block"><span class="property">padding</span>: <span class="value">3rem 1rem</span>; <span class="comment">/* topo/baixo: 3rem | esquerda/direita: 1rem */</span></div>
+
+        <h3>rem — unidade de medida</h3>
+        <p><span class="badge">rem</span> é uma unidade relativa ao tamanho de fonte padrão do navegador (normalmente 16px). Assim, <span class="badge">1rem = 16px</span>, <span class="badge">2rem = 32px</span>, etc. É mais flexível que usar pixels fixos.</p>
+
+        <h3>box-shadow</h3>
+        <p>Adiciona uma sombra ao elemento. Os valores são, em ordem:</p>
+        <div class="code-block"><span class="property">box-shadow</span>: <span class="value">X  Y  desfoque  cor</span>;
+<span class="comment">/* Exemplo: */</span>
+<span class="property">box-shadow</span>: <span class="value">0  4px  10px  rgba(0,0,0,0.2)</span>;</div>
+        <ul>
+            <li><strong>0</strong> — deslocamento horizontal (0 = sem deslocamento)</li>
+            <li><strong>4px</strong> — deslocamento vertical (para baixo)</li>
+            <li><strong>10px</strong> — quanto a sombra vai se desfocar (blur)</li>
+            <li><strong>rgba(0,0,0,0.2)</strong> — cor da sombra (explicado abaixo)</li>
+        </ul>
+
+        <h3>rgba() — cor com transparência</h3>
+        <p>O <span class="badge">rgba()</span> é como o <span class="badge">rgb()</span>, mas com um quarto valor: a <strong>opacidade</strong> (alpha), de 0 a 1.</p>
+        <div class="code-block"><span class="value">rgba(0, 0, 0, 0.2)</span>  <span class="comment">/* preto com 20% de opacidade */</span>
+<span class="value">rgba(255, 255, 255, 0.5)</span>  <span class="comment">/* branco com 50% de opacidade */</span></div>
+    </div>
+
+    <div class="resultado-visual" style="background: #f8f9fa;">
+            <div style="padding: 2rem 1rem; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.3); background: white; border-radius: 8px;">
+                Esta caixa tem <strong>padding</strong> (espaço interno) e um <strong>box-shadow</strong> escuro com transparência, criando a ilusão de que está flutuando.
+            </div>
+        </div>
+    <!-- ============================================================ -->
+    <!-- BLOCO 5 — Layout com Flexbox -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>5. Flexbox — Organizando elementos</h2>
+
+        <div class="code-block"><span class="selector">main</span> {
+    <span class="property">max-width</span>: <span class="value">900px</span>;
+    <span class="property">margin</span>: <span class="value">0 auto</span>;
+    <span class="property">display</span>: <span class="value">flex</span>;
+    <span class="property">flex-direction</span>: <span class="value">column</span>;
+    <span class="property">gap</span>: <span class="value">3rem</span>;
+}</div>
+
+        <h3>max-width</h3>
+        <p>Limita a largura máxima do elemento. O conteúdo nunca vai ser mais largo que <span class="badge">900px</span>, mas pode ser menor em telas pequenas.</p>
+
+        <h3>margin: 0 auto</h3>
+        <p>Com o <span class="badge">max-width</span> definido, usar <span class="badge">margin: 0 auto</span> centraliza o elemento horizontalmente na página. O <span class="badge">auto</span> divide o espaço restante igualmente dos dois lados.</p>
+
+        <h3>display: flex</h3>
+        <p>Ativa o <strong>Flexbox</strong>, um sistema de layout moderno do CSS. Quando você coloca <span class="badge">display: flex</span> em um elemento, os filhos diretos dele se organizam de forma flexível.</p>
+
+        <h3>flex-direction</h3>
+        <p>Define a direção em que os filhos serão organizados:</p>
+        <ul>
+            <li><span class="badge">row</span> (padrão) — lado a lado, em linha horizontal</li>
+            <li><span class="badge">column</span> — um embaixo do outro, em coluna vertical</li>
+        </ul>
+
+        <h3>gap</h3>
+        <p>Define o espaço entre os filhos do elemento flex. É muito mais prático do que ficar colocando <span class="badge">margin</span> em cada filho manualmente.</p>
+    </div>
+
+    <div class="resultado-visual">
+            <div style="display: flex; flex-direction: row; gap: 1rem; background: #eee; padding: 15px; border-radius: 8px;">
+                <div style="background: #00d4ff; color: #000; padding: 15px; flex: 1; text-align: center; border-radius: 6px; font-weight: bold;">Item 1</div>
+                <div style="background: #f0a500; color: #000; padding: 15px; flex: 1; text-align: center; border-radius: 6px; font-weight: bold;">Item 2</div>
+                <div style="background: #3fb950; color: #000; padding: 15px; flex: 1; text-align: center; border-radius: 6px; font-weight: bold;">Item 3</div>
+            </div>
+            <p style="font-size: 0.85rem; color: #666; margin-top: 10px; text-align: center;">Eles estão lado a lado (row) com um espaço (gap) entre eles!</p>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 6 — border-radius e border-left -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>6. Bordas</h2>
+
+        <div class="code-block"><span class="selector">section</span> {
+    <span class="property">border-radius</span>: <span class="value">12px</span>;
+    <span class="property">border-left</span>: <span class="value">6px solid #4b0082</span>;
+}</div>
+
+        <h3>border-radius</h3>
+        <p>Arredonda os cantos do elemento. Quanto maior o valor, mais arredondado fica. Com <span class="badge">border-radius: 50%</span> você transforma um quadrado em um círculo perfeito.</p>
+
+        <h3>border-left (e variações)</h3>
+        <p>Aplica borda apenas em um lado específico. O valor é escrito em três partes: espessura, estilo e cor.</p>
+        <div class="code-block"><span class="property">border-left</span>: <span class="value">6px solid #4b0082</span>;
+<span class="comment">/* espessura | estilo | cor */</span>
+
+<span class="comment">/* Outros lados: */</span>
+<span class="property">border-top</span>: <span class="value">...</span>;
+<span class="property">border-right</span>: <span class="value">...</span>;
+<span class="property">border-bottom</span>: <span class="value">...</span>;
+<span class="comment">/* border: (aplica nos 4 lados ao mesmo tempo) */</span></div>
+    </div>
+
+    <div class="resultado-visual">
+            <div style="border-radius: 12px; border-left: 6px solid #4b0082; background: #f4f4f4; padding: 20px;">
+                Elemento com os cantos arredondados (border-radius) e uma borda grossa roxa apenas no lado esquerdo (border-left).
+            </div>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 7 — Seletores de atributo -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>7. Seletores de Atributo <span class="badge">input[type="..."]</span></h2>
+
+        <div class="code-block"><span class="selector">input[type="radio"]</span> { <span class="property">border-radius</span>: <span class="value">50%</span>; }
+<span class="selector">input[type="checkbox"]</span> { <span class="property">border-radius</span>: <span class="value">4px</span>; }</div>
+
+        <p>Você pode selecionar elementos com base nos seus atributos HTML. A sintaxe é <span class="badge">elemento[atributo="valor"]</span>. Isso permite estilizar apenas os inputs do tipo radio, ou apenas os do tipo checkbox, por exemplo — sem precisar adicionar classes no HTML.</p>
+    </div>
+
+    <div class="resultado-visual">
+            <label style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                <input type="radio" name="ex" checked style="width: 20px; height: 20px; accent-color: #f0a500;">
+                Sou um input do tipo "radio"
+            </label>
+            <label style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" checked style="width: 20px; height: 20px; accent-color: #00d4ff;">
+                Sou um input do tipo "checkbox"
+            </label>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 8 — appearance, width/height, cursor, position, vertical-align -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>8. Estilizando inputs customizados</h2>
+
+        <div class="code-block"><span class="selector">input[type="radio"], input[type="checkbox"]</span> {
+    <span class="property">appearance</span>: <span class="value">none</span>;
+    <span class="property">-webkit-appearance</span>: <span class="value">none</span>;
+    <span class="property">width</span>: <span class="value">18px</span>;
+    <span class="property">height</span>: <span class="value">18px</span>;
+    <span class="property">cursor</span>: <span class="value">pointer</span>;
+    <span class="property">position</span>: <span class="value">relative</span>;
+    <span class="property">vertical-align</span>: <span class="value">middle</span>;
+}</div>
+
+        <h3>appearance: none</h3>
+        <p>Remove o visual padrão que o sistema operacional aplica nos inputs (aquele estilo cinza padrão de rádio/checkbox). Sem isso, o navegador sobrescreve seu CSS. O <span class="badge">-webkit-appearance</span> é o mesmo, mas para compatibilidade com navegadores baseados em WebKit (como o Safari).</p>
+
+        <h3>width e height</h3>
+        <p>Definem a largura e a altura do elemento, respectivamente. Podem receber valores em <span class="badge">px</span>, <span class="badge">rem</span>, <span class="badge">%</span>, entre outros.</p>
+
+        <h3>cursor</h3>
+        <p>Define como o cursor do mouse aparece ao passar sobre o elemento. <span class="badge">pointer</span> exibe a "mãozinha", indicando que é clicável.</p>
+
+        <h3>position: relative</h3>
+        <p>Ativa o sistema de posicionamento do elemento. Com <span class="badge">relative</span>, o elemento continua no fluxo normal da página, mas agora serve como <em>referência de posição</em> para filhos com <span class="badge">position: absolute</span>.</p>
+
+        <h3>vertical-align: middle</h3>
+        <p>Alinha o elemento verticalmente ao centro em relação ao texto ao seu lado. Útil para inputs que ficam ao lado de labels.</p>
+    </div>
+
+    <div class="resultado-visual">
+            <style>
+                .ex-custom {
+                    appearance: none; -webkit-appearance: none;
+                    width: 24px; height: 24px; border: 2px solid #ccc;
+                    border-radius: 4px; cursor: pointer; vertical-align: middle;
+                    background: #eee;
+                }
+            </style>
+            <input type="checkbox" class="ex-custom">
+            <span style="vertical-align: middle; margin-left: 5px;">Checkbox "zerado" (sem o visual padrão do navegador)</span>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 9 — Pseudo-classes :checked e :focus e :hover -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>9. Pseudo-classes: <span class="badge">:checked</span>, <span class="badge">:focus</span>, <span class="badge">:hover</span></h2>
+
+        <p>Pseudo-classes são palavras-chave adicionadas a um seletor que aplicam estilo apenas quando o elemento está em um estado específico.</p>
+
+        <div class="code-block"><span class="selector">input[type="radio"]:checked</span> {
+    <span class="property">background-color</span>: <span class="value">pink</span>;
+}
+
+<span class="selector">input:focus</span> {
+    <span class="property">outline</span>: <span class="value">none</span>;
+    <span class="property">border-color</span>: <span class="value">pink</span>;
+}
+
+<span class="selector">input[type="submit"]:hover</span> {
+    <span class="property">background-color</span>: <span class="value">#6b2a60</span>;
+}</div>
+
+        <ul>
+            <li><span class="badge">:checked</span> — ativo quando o radio/checkbox está marcado</li>
+            <li><span class="badge">:focus</span> — ativo quando o elemento está selecionado (clicado ou com Tab). O <span class="badge">outline: none</span> remove o contorno azul padrão do navegador</li>
+            <li><span class="badge">:hover</span> — ativo quando o mouse passa por cima do elemento</li>
+        </ul>
+    </div>
+
+    <div class="resultado-visual">
+            <style>
+                .ex-btn {
+                    padding: 10px 20px; border: none; background: #ddd; 
+                    cursor: pointer; border-radius: 5px; font-weight: bold;
+                }
+                .ex-btn:hover { background: #6b2a60; color: white; }
+                .ex-input:focus { outline: none; border: 2px solid pink; background: #fffafb;}
+            </style>
+            
+            <input type="text" class="ex-input" placeholder="Clique aqui (:focus)" style="padding: 10px; border: 2px solid #ccc; border-radius: 5px; margin-right: 10px;">
+            
+            <button class="ex-btn">Passe o mouse (:hover)</button>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 10 — Pseudo-elemento ::after -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>10. Pseudo-elemento <span class="badge">::after</span></h2>
+
+        <div class="code-block"><span class="selector">input[type="checkbox"]:checked::after</span> {
+    <span class="property">content</span>: <span class="value">"✓"</span>;
+    <span class="property">position</span>: <span class="value">absolute</span>;
+    <span class="property">color</span>: <span class="value">#4b0082</span>;
+    <span class="property">font-size</span>: <span class="value">14px</span>;
+    <span class="property">left</span>: <span class="value">2px</span>;
+    <span class="property">top</span>: <span class="value">-3px</span>;
+}</div>
+
+        <p><span class="badge">::after</span> cria um elemento visual "fantasma" que aparece depois do conteúdo do elemento, sem precisar adicionar nada no HTML. O par é o <span class="badge">::before</span>, que aparece antes. A propriedade <span class="badge">content</span> é obrigatória — é onde você define o que vai aparecer.</p>
+
+        <h3>position: absolute</h3>
+        <p>Remove o elemento do fluxo normal da página e o posiciona em relação ao seu pai com <span class="badge">position: relative</span>. Aí você usa <span class="badge">top</span>, <span class="badge">left</span>, <span class="badge">right</span> e <span class="badge">bottom</span> para definir a posição exata.</p>
+
+        <h3>font-size</h3>
+        <p>Define o tamanho da fonte do elemento. Pode ser em <span class="badge">px</span>, <span class="badge">rem</span>, <span class="badge">em</span>, entre outros.</p>
+    </div>
+
+    <div class="resultado-visual">
+            <style>
+                .ex-check {
+                    appearance: none; width: 24px; height: 24px; 
+                    border: 2px solid #4b0082; border-radius: 4px; 
+                    position: relative; cursor: pointer; vertical-align: middle;
+                }
+                .ex-check:checked { background: #4b0082; }
+                .ex-check:checked::after {
+                    content: "✓"; position: absolute; color: white;
+                    font-size: 16px; left: 4px; top: 0px;
+                }
+            </style>
+            <input type="checkbox" class="ex-check"> 
+            <span style="vertical-align: middle; margin-left: 5px;">Clique para ver o ::after aparecendo!</span>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 11 — transition e transform -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>11. Animações simples: <span class="badge">transition</span> e <span class="badge">transform</span></h2>
+
+        <div class="code-block"><span class="selector">input[type="submit"]</span> {
+    <span class="property">transition</span>: <span class="value">0.3s</span>;
+    <span class="property">text-transform</span>: <span class="value">uppercase</span>;
+}
+
+<span class="selector">input[type="submit"]:hover</span> {
+    <span class="property">transform</span>: <span class="value">translateY(-2px)</span>;
+}</div>
+
+        <h3>transition</h3>
+        <p>Faz com que as mudanças de estilo aconteçam de forma suave (animada) ao invés de instantânea. O valor <span class="badge">0.3s</span> significa que a transição leva 0,3 segundos. Você pode especificar qual propriedade animar ou usar <span class="badge">all</span> para todas.</p>
+
+        <h3>transform: translateY()</h3>
+        <p>Move o elemento sem afetar o espaço que ele ocupa na página. <span class="badge">translateY(-2px)</span> sobe o elemento 2 pixels. Combinado com o <span class="badge">transition</span>, cria o efeito de "flutuar" ao passar o mouse.</p>
+
+        <h3>text-transform</h3>
+        <p>Altera a capitalização do texto sem mudar o HTML:</p>
+        <ul>
+            <li><span class="badge">uppercase</span> — tudo em MAIÚSCULAS</li>
+            <li><span class="badge">lowercase</span> — tudo em minúsculas</li>
+            <li><span class="badge">capitalize</span> — Primeira letra de cada palavra maiúscula</li>
+        </ul>
+    </div>
+
+    <div class="resultado-visual">
+            <style>
+                .ex-anim {
+                    padding: 12px 24px; background: #00d4ff; border: none; border-radius: 6px;
+                    color: black; font-weight: bold; cursor: pointer;
+                    transition: 0.3s; /* Aqui entra a suavidade! */
+                    text-transform: uppercase;
+                }
+                .ex-anim:hover {
+                    transform: translateY(-5px); /* Move 5px para cima */
+                    box-shadow: 0 5px 10px rgba(0,212,255,0.4);
+                }
+            </style>
+            <button class="ex-anim">Passe o mouse em mim</button>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 12 — Tabela: border-collapse e overflow -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>12. Estilizando tabelas</h2>
+
+        <div class="code-block"><span class="selector">table</span> {
+    <span class="property">width</span>: <span class="value">100%</span>;
+    <span class="property">border-collapse</span>: <span class="value">collapse</span>;
+    <span class="property">overflow</span>: <span class="value">hidden</span>;
+}</div>
+
+        <h3>width: 100%</h3>
+        <p>Faz o elemento ocupar 100% da largura do seu elemento pai.</p>
+
+        <h3>border-collapse: collapse</h3>
+        <p>Por padrão, cada célula da tabela tem sua própria borda, o que resulta em bordas duplicadas entre células. <span class="badge">border-collapse: collapse</span> junta essas bordas em uma só.</p>
+
+        <h3>overflow: hidden</h3>
+        <p>Esconde qualquer conteúdo que ultrapasse os limites do elemento. Aqui é usado para que o <span class="badge">border-radius</span> da tabela funcione nos cantos (sem isso, as células dos cantos "vazariam" para fora da borda arredondada).</p>
+    </div>
+
+    <div class="resultado-visual">
+            <table style="width: 100%; border-collapse: collapse; overflow: hidden; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.1);">
+                <thead>
+                    <tr style="background: #333; color: white;">
+                        <th style="padding: 10px;">Nome</th>
+                        <th style="padding: 10px;">Idade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #ddd;">
+                        <td style="padding: 10px;">João</td>
+                        <td style="padding: 10px;">25</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">Maria</td>
+                        <td style="padding: 10px;">30</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 13 — text-decoration -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>13. <span class="badge">text-decoration</span></h2>
+
+        <div class="code-block"><span class="selector">footer a</span> {
+    <span class="property">text-decoration</span>: <span class="value">none</span>;
+}
+
+<span class="selector">footer a:hover</span> {
+    <span class="property">text-decoration</span>: <span class="value">underline</span>;
+}</div>
+
+        <p>Controla decorações no texto:</p>
+        <ul>
+            <li><span class="badge">none</span> — remove o sublinhado padrão dos links</li>
+            <li><span class="badge">underline</span> — adiciona sublinhado</li>
+            <li><span class="badge">line-through</span> — adiciona tachado (riscado)</li>
+        </ul>
+
+        <p>Note também o seletor <span class="badge">footer a</span>: isso seleciona apenas as tags <span class="badge">&lt;a&gt;</span> que estão <em>dentro</em> de um <span class="badge">&lt;footer&gt;</span>. Você pode combinar seletores assim para ser mais específico.</p>
+    </div>
+
+    <div class="resultado-visual">
+            <style>
+                .ex-link { color: #f0a500; text-decoration: none; font-weight: bold; }
+                .ex-link:hover { text-decoration: underline; }
+            </style>
+            <p>Acesse o <a href="#" class="ex-link">Guia Completo</a> (Passe o mouse)</p>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 14 — Classes CSS -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>14. Classes CSS: <span class="badge">.nome-da-classe</span></h2>
+
+        <div class="code-block"><span class="selector">.form-group</span> {
+    <span class="property">display</span>: <span class="value">flex</span>;
+    <span class="property">flex-direction</span>: <span class="value">column</span>;
+    <span class="property">gap</span>: <span class="value">0.4rem</span>;
+    <span class="property">margin-bottom</span>: <span class="value">1.2rem</span>;
+}
+
+<span class="selector">.btn-submit</span> {
+    <span class="property">align-self</span>: <span class="value">flex-start</span>;
+    <span class="property">padding</span>: <span class="value">10px 30px</span> <span class="keyword">!important</span>;
+}</div>
+
+        <p>As classes são a principal forma de aplicar CSS de forma reutilizável. No CSS, uma classe é definida com um ponto antes do nome (<span class="badge">.nome</span>). No HTML, você aplica a classe com o atributo <span class="badge">class="nome"</span>:</p>
+        <div class="code-block"><span class="keyword">&lt;div</span> <span class="property">class</span>=<span class="string">"form-group"</span><span class="keyword">&gt;</span>...<span class="keyword">&lt;/div&gt;</span></div>
+        <p>Um elemento pode ter várias classes separadas por espaço: <span class="badge">class="form-group btn-submit"</span>.</p>
+
+        <h3>align-self</h3>
+        <p>Quando os filhos estão dentro de um <span class="badge">display: flex</span>, o <span class="badge">align-self</span> permite que um filho específico quebre o alinhamento padrão do grupo. <span class="badge">flex-start</span> alinha o elemento no início do eixo transversal (à esquerda, quando a direção é coluna).</p>
+
+        <h3>!important</h3>
+        <p>Força aquela declaração a ter prioridade máxima, sobrescrevendo qualquer outra regra que tente definir a mesma propriedade naquele elemento. Deve ser usado com moderação — em projetos grandes, abusar do <span class="badge">!important</span> torna o CSS difícil de manter.</p>
+    </div>
+
+    <div class="resultado-visual">
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; border: 1px dashed #ccc; padding: 15px;">
+                <span style="font-size: 0.8rem; color: #888;">&lt;div class="form-group"&gt;</span>
+                <label>Email:</label>
+                <input type="text" style="padding: 5px;">
+                <button style="align-self: flex-start; padding: 10px 30px; background: #ccc; border: none;">Botão</button>
+            </div>
+        </div>
+
+    <!-- ============================================================ -->
+    <!-- BLOCO 15 — font-weight e font-family: inherit -->
+    <!-- ============================================================ -->
+    <div class="topico">
+        <h2>15. Herança: <span class="badge">inherit</span> e <span class="badge">font-weight</span></h2>
+
+        <div class="code-block"><span class="selector">label</span> {
+    <span class="property">font-weight</span>: <span class="value">500</span>;
+}
+
+<span class="selector">input</span> {
+    <span class="property">font-family</span>: <span class="value">inherit</span>;
+}</div>
+
+        <h3>font-weight</h3>
+        <p>Controla a espessura do texto. Os valores mais comuns são:</p>
+        <ul>
+            <li><span class="badge">400</span> — peso normal (equivale a <span class="badge">normal</span>)</li>
+            <li><span class="badge">500</span> — meio-negrito</li>
+            <li><span class="badge">700</span> — negrito (equivale a <span class="badge">bold</span>)</li>
+            <li><span class="badge">900</span> — negrito extra-pesado</li>
+        </ul>
+
+        <h3>inherit</h3>
+        <p>Força o elemento a herdar o valor da propriedade do seu elemento pai. Inputs, por padrão, não herdam a fonte do body — então <span class="badge">font-family: inherit</span> força o input a usar a mesma fonte definida no body.</p>
+    </div>
+
+    <div class="resultado-visual">
+            <p style="font-weight: 400; margin: 5px 0;">Este texto está com font-weight: 400 (Normal)</p>
+            <p style="font-weight: 700; margin: 5px 0;">Este texto está com font-weight: 700 (Negrito)</p>
+            <p style="font-weight: 900; margin: 5px 0;">Este texto está com font-weight: 900 (Extra-pesado)</p>
+        </div>
+
+</main>
+
+<footer>
+    <p>Guia gerado para estudos de CSS — bons estudos! 🚀</p>
+</footer>
+
+</body>
+</html>

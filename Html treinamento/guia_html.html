@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia de HTML</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;600;800&display=swap');
+
+        :root {
+            --bg:       #fdf8f0;
+            --surface:  #ffffff;
+            --ink:      #2b2118;
+            --muted:    #7a6a5a;
+            --accent:   #c0392b;
+            --accent2:  #e67e22;
+            --tag-bg:   #fff0e8;
+            --tag-br:   #f0c9a8;
+            --line:     #e8ddd0;
+            --nav-bg:   #2b2118;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lora', serif;
+            background: var(--bg);
+            color: var(--ink);
+            line-height: 1.8;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: var(--nav-bg);
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        nav .brand {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            color: #fff;
+            font-size: 1rem;
+            padding: 1rem 0;
+            flex: 1;
+            letter-spacing: 0.05em;
+        }
+
+        nav .brand span { color: var(--accent2); }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .nav-links a {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.45rem 1rem;
+            border-radius: 6px;
+            border: 2px solid transparent;
+            transition: 0.2s;
+            letter-spacing: 0.04em;
+        }
+
+        .nav-links a.active {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .nav-links a.link-css {
+            color: #79c0ff;
+            border-color: #79c0ff44;
+        }
+
+        .nav-links a.link-css:hover {
+            background: #79c0ff22;
+        }
+
+        .nav-links a.link-quiz {
+            color: var(--accent2);
+            border-color: #e67e2244;
+        }
+
+        .nav-links a.link-quiz:hover {
+            background: #e67e2222;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--nav-bg);
+            color: #fff;
+            padding: 5rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '</>';
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14rem;
+            color: rgba(255,255,255,0.03);
+            top: -2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            letter-spacing: -0.02em;
+            position: relative;
+        }
+
+        .hero h1 span { color: var(--accent2); }
+
+        .hero p {
+            color: #aaa;
+            margin-top: 1rem;
+            font-size: 1.05rem;
+            font-family: 'Outfit', sans-serif;
+            position: relative;
+        }
+
+        .hero-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-links a {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.7rem 1.6rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hero-links .btn-css {
+            background: #1e2a3a;
+            color: #79c0ff;
+            border: 2px solid #79c0ff44;
+        }
+
+        .hero-links .btn-css:hover { background: #79c0ff22; transform: translateY(-2px); }
+
+        .hero-links .btn-quiz {
+            background: #3a2a1a;
+            color: var(--accent2);
+            border: 2px solid #e67e2244;
+        }
+
+        .hero-links .btn-quiz:hover { background: #e67e2222; transform: translateY(-2px); }
+
+        /* ── ÍNDICE ── */
+        .index-bar {
+            background: var(--surface);
+            border-bottom: 1px solid var(--line);
+            padding: 1.2rem 2rem;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .index-bar a {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--muted);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            border: 1px solid var(--line);
+            transition: 0.2s;
+        }
+
+        .index-bar a:hover {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        /* ── MAIN ── */
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+        }
+
+        /* ── TÓPICO ── */
+        .topico {
+            scroll-margin-top: 80px;
+        }
+
+        .topico-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--line);
+        }
+
+        .num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 600;
+            background: var(--accent);
+            color: white;
+            width: 2.2rem;
+            height: 2.2rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .topico h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: var(--ink);
+            letter-spacing: -0.01em;
+        }
+
+        .topico h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--accent);
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .topico p {
+            color: #3d3028;
+            margin-bottom: 0.9rem;
+            font-size: 1rem;
+        }
+
+        .topico ul, .topico ol {
+            padding-left: 1.5rem;
+            color: #3d3028;
+        }
+
+        .topico li { margin-bottom: 0.5rem; }
+
+        /* ── TAG ── */
+        .tag {
+            display: inline-block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            background: var(--tag-bg);
+            color: var(--accent);
+            border: 1px solid var(--tag-br);
+            border-radius: 5px;
+            padding: 0.1rem 0.5rem;
+            margin: 0 1px;
+        }
+
+        /* ── BLOCO DE CÓDIGO ── */
+        .code-block {
+            background: #1c1612;
+            border-radius: 10px;
+            padding: 1.3rem 1.5rem;
+            margin: 1rem 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.83rem;
+            color: #e8d9c8;
+            overflow-x: auto;
+            white-space: pre;
+            border-left: 4px solid var(--accent2);
+        }
+
+        .kw   { color: #f97583; }
+        .attr { color: #ffab70; }
+        .val  { color: #9ecbff; }
+        .cmt  { color: #6a737d; font-style: italic; }
+        .tag-c{ color: #85e89d; }
+
+        /* ── DICA ── */
+        .dica {
+            background: #fff8e6;
+            border: 1px solid #f0c060;
+            border-left: 4px solid var(--accent2);
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            margin-top: 1rem;
+            font-size: 0.93rem;
+            color: #5a4010;
+        }
+
+        .dica strong { color: var(--accent2); }
+
+        /* ── GRID DE TIPOS DE INPUT ── */
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.7rem;
+            margin: 1rem 0;
+        }
+
+        .input-card {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 0.8rem 1rem;
+        }
+
+        .input-card .type {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .input-card .desc {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-top: 0.25rem;
+        }
+
+        /* ── BANNER DE LINKS ── */
+        .link-banner {
+            background: linear-gradient(135deg, #1c1612, #2b2118);
+            border-radius: 14px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            border: 1px solid #3d3028;
+        }
+
+        .link-banner h2 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #fff;
+        }
+
+        .link-banner p {
+            color: #999;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+        }
+
+        .link-banner .links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .link-banner a {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 0.7rem 1.4rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            transition: 0.2s;
+        }
+
+        .link-banner a:hover { transform: translateY(-2px); }
+
+        .link-banner .l-css {
+            background: #0d1b2a;
+            color: #79c0ff;
+            border: 2px solid #79c0ff55;
+        }
+
+        .link-banner .l-quiz {
+            background: #2a1a0d;
+            color: var(--accent2);
+            border: 2px solid #e67e2255;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            border-top: 1px solid var(--line);
+        }
+
+        /* ── RESULTADO VISUAL (EXEMPLOS PRÁTICOS) ── */
+        .resultado-visual {
+            background: #ffffff;
+            border: 1px solid var(--line);
+            border-left: 4px solid #3498db; /* Azul para diferenciar do código */
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 0 0 1rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            font-family: Arial, sans-serif; /* Fonte padrão de navegador para o exemplo */
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .resultado-visual::before {
+            content: "👁️ Como fica na tela do navegador:";
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 800;
+            color: #3498db;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 1px dashed #dcd1c4;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Estilos específicos para os exemplos não quebrarem o layout principal */
+        .resultado-visual h1 { font-size: 2em; margin-bottom: 0.5em; color: #000; font-family: Times, serif; }
+        .resultado-visual h2 { font-size: 1.5em; margin-bottom: 0.5em; color: #000; font-family: Times, serif;}
+        .resultado-visual h3 { font-size: 1.17em; margin-bottom: 0.5em; color: #000; font-family: Times, serif;}
+        .resultado-visual table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .resultado-visual th, .resultado-visual td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        .resultado-visual th { background: #f4f4f4; }
+        .resultado-visual fieldset { border: 1px solid #ccc; padding: 15px; border-radius: 5px; margin-top: 10px; }
+        .resultado-visual input[type="text"], .resultado-visual select { padding: 5px; margin-bottom: 10px; }
+        .resultado-visual ul, .resultado-visual ol { padding-left: 20px; }
+        
+        /* Simulações visuais para tags invisíveis (Head e Semântica) */
+        .simulador-aba { display: inline-block; background: #e0e0e0; padding: 8px 15px; border-radius: 8px 8px 0 0; font-size: 0.85rem; color: #333; border: 1px solid #ccc; border-bottom: none; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
+        .simulador-aba::before { content: "🌍"; margin-right: 8px; }
+        .caixa-semantica { border: 2px dashed #999; background: #f9f9f9; padding: 15px; margin-bottom: 10px; text-align: center; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; color: #666; }
+        .caixa-semantica.main { min-height: 80px; }
+    </style>
+</head>
+<body>
+
+<!-- NAVEGAÇÃO -->
+<nav>
+    <div class="brand">📄 Guias de <span>Web Dev</span></div>
+    <div class="nav-links">
+        <a href="guia_html.html" class="active">HTML</a>
+        <a href="guia_css.html" class="link-css">CSS</a>
+        <a href="index.html" class="link-quiz">Quiz</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <h1>Guia de <span>HTML</span></h1>
+    <p>Tudo que você precisa saber sobre a estrutura das páginas web</p>
+    <div class="hero-links">
+        <a href="guia_css.html" class="btn-css">🎨 Ver Guia de CSS</a>
+        <a href="index.html" class="btn-quiz">📝 Ir para o Quiz</a>
+    </div>
+</div>
+
+<!-- ÍNDICE RÁPIDO -->
+<div class="index-bar">
+    <a href="#t1">1. Estrutura base</a>
+    <a href="#t2">2. O &lt;head&gt;</a>
+    <a href="#t3">3. Semântica do body</a>
+    <a href="#t4">4. Títulos e parágrafos</a>
+    <a href="#t5">5. Formatação de texto</a>
+    <a href="#t6">6. Links e imagens</a>
+    <a href="#t7">7. Formulários</a>
+    <a href="#t8">8. Tabelas</a>
+    <a href="#t9">9. Listas</a>
+    <a href="#t10">10. Outros elementos</a>
+</div>
+
+<main>
+
+    <!-- ── 1 ── -->
+    <div class="topico" id="t1">
+        <div class="topico-header">
+            <div class="num">01</div>
+            <h2>Estrutura base do documento</h2>
+        </div>
+        <p>Todo arquivo HTML começa com a mesma estrutura base. A primeira linha é sempre o <span class="tag">&lt;!DOCTYPE html&gt;</span>, que avisa ao navegador que o arquivo usa HTML5.</p>
+        <p>Em seguida vem a tag <span class="tag">&lt;html&gt;</span>, que é a raiz do documento — ela envolve absolutamente tudo. Ela recebe o atributo <span class="tag">lang="pt-br"</span> para indicar o idioma da página.</p>
+        <p>Dentro do <span class="tag">&lt;html&gt;</span> existem dois grandes blocos:</p>
+        <ul>
+            <li><span class="tag">&lt;head&gt;</span> — área invisível com configurações da página</li>
+            <li><span class="tag">&lt;body&gt;</span> — tudo que o usuário vê na tela</li>
+        </ul>
+        <div class="code-block"><span class="kw">&lt;!DOCTYPE html&gt;</span>
+<span class="kw">&lt;html</span> <span class="attr">lang</span>=<span class="val">"pt-br"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;head&gt;</span>
+    <span class="cmt">&lt;!-- configurações da página --&gt;</span>
+  <span class="kw">&lt;/head&gt;</span>
+  <span class="kw">&lt;body&gt;</span>
+    <span class="cmt">&lt;!-- conteúdo visível --&gt;</span>
+  <span class="kw">&lt;/body&gt;</span>
+<span class="kw">&lt;/html&gt;</span></div>
+    </div>
+
+    <div class="resultado-visual">
+            <p style="color: #666; font-style: italic; text-align: center;">Uma página em branco. A estrutura base por si só não gera elementos visuais na tela, ela apenas prepara o terreno.</p>
+        </div>
+
+
+
+    <!-- ── 2 ── -->
+    <div class="topico" id="t2">
+        <div class="topico-header">
+            <div class="num">02</div>
+            <h2>O &lt;head&gt; e suas tags</h2>
+        </div>
+        <p>Dentro do <span class="tag">&lt;head&gt;</span> ficam os <strong>metadados</strong> — informações sobre a página que não aparecem na tela, mas são essenciais para o funcionamento correto.</p>
+
+        <h3>&lt;meta charset="UTF-8"&gt;</h3>
+        <p>Define a codificação de texto. Sem ela, acentos e caracteres especiais do português podem aparecer quebrados.</p>
+
+        <h3>&lt;meta name="viewport"&gt;</h3>
+        <p>Garante que a página se adapte corretamente ao tamanho de celulares e tablets (responsividade).</p>
+
+        <h3>&lt;title&gt;</h3>
+        <p>Define o nome que aparece na aba do navegador. É importante tanto para o usuário identificar a página quanto para o Google.</p>
+
+        <div class="code-block"><span class="kw">&lt;head&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;title&gt;</span>Nome da Página<span class="kw">&lt;/title&gt;</span>
+  <span class="kw">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"style.css"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/head&gt;</span></div>
+    </div>
+
+    <div class="resultado-visual" style="background: #f5f5f5; border-radius: 10px 10px 0 0; padding-bottom: 0;">
+            <div class="simulador-aba">Nome da Página</div>
+            <div style="background: white; border: 1px solid #ccc; border-top: none; height: 50px;"></div>
+            <p style="font-size: 0.85rem; color: #666; margin-top: 10px; padding-bottom: 1rem;">O &lt;title&gt; muda o nome que aparece na aba superior do navegador.</p>
+        </div>
+
+    <!-- ── 3 ── -->
+    <div class="topico" id="t3">
+        <div class="topico-header">
+            <div class="num">03</div>
+            <h2>Organização semântica do &lt;body&gt;</h2>
+        </div>
+        <p>O <span class="tag">&lt;body&gt;</span> é dividido em seções com significado próprio, chamadas de <strong>tags semânticas</strong>. Elas ajudam tanto o navegador quanto leitores de tela a entenderem a estrutura da página.</p>
+
+        <h3>Tags semânticas principais</h3>
+        <ul>
+            <li><span class="tag">&lt;header&gt;</span> — cabeçalho visual da página (título principal, menu de navegação)</li>
+            <li><span class="tag">&lt;main&gt;</span> — conteúdo principal, deve existir apenas <strong>um</strong> por página</li>
+            <li><span class="tag">&lt;footer&gt;</span> — rodapé (copyright, contato, links úteis)</li>
+            <li><span class="tag">&lt;section&gt;</span> — divide o conteúdo em blocos temáticos dentro do <span class="tag">&lt;main&gt;</span></li>
+        </ul>
+
+        <div class="code-block"><span class="kw">&lt;body&gt;</span>
+  <span class="kw">&lt;header&gt;</span>
+    <span class="kw">&lt;h1&gt;</span>Título do Site<span class="kw">&lt;/h1&gt;</span>
+  <span class="kw">&lt;/header&gt;</span>
+
+  <span class="kw">&lt;main&gt;</span>
+    <span class="kw">&lt;section&gt;</span>
+      <span class="cmt">&lt;!-- bloco de conteúdo --&gt;</span>
+    <span class="kw">&lt;/section&gt;</span>
+  <span class="kw">&lt;/main&gt;</span>
+
+  <span class="kw">&lt;footer&gt;</span>
+    <span class="cmt">&lt;!-- rodapé --&gt;</span>
+  <span class="kw">&lt;/footer&gt;</span>
+<span class="kw">&lt;/body&gt;</span></div>
+    </div>
+
+    <div class="resultado-visual">
+            <div class="caixa-semantica">&lt;header&gt; Cabeçalho (Menu, Logo)</div>
+            <div class="caixa-semantica main">
+                &lt;main&gt; Conteúdo Principal
+                <div class="caixa-semantica" style="margin-top: 10px; background: #fff; border-color: #ccc;">&lt;section&gt; Seção de assunto específico</div>
+            </div>
+            <div class="caixa-semantica">&lt;footer&gt; Rodapé (Copyright, Links)</div>
+        </div>
+
+    <!-- ── 4 ── -->
+    <div class="topico" id="t4">
+        <div class="topico-header">
+            <div class="num">04</div>
+            <h2>Títulos e parágrafos</h2>
+        </div>
+        <p>Os títulos vão de <span class="tag">&lt;h1&gt;</span> até <span class="tag">&lt;h6&gt;</span> em ordem <strong>decrescente de importância</strong>. Use-os como a hierarquia de um livro: capítulos, seções, subseções.</p>
+        <ul>
+            <li><span class="tag">&lt;h1&gt;</span> — título principal da página, deve existir <strong>apenas um</strong></li>
+            <li><span class="tag">&lt;h2&gt;</span> — subtítulos de seções</li>
+            <li><span class="tag">&lt;h3&gt;</span> — sub-subtítulos</li>
+            <li><span class="tag">&lt;h4&gt;</span> a <span class="tag">&lt;h6&gt;</span> — níveis ainda mais profundos</li>
+        </ul>
+        <p>O <span class="tag">&lt;p&gt;</span> cria um parágrafo de texto. O navegador adiciona automaticamente um espaço acima e abaixo de cada parágrafo.</p>
+
+        <div class="code-block"><span class="kw">&lt;h1&gt;</span>Título Principal<span class="kw">&lt;/h1&gt;</span>
+<span class="kw">&lt;h2&gt;</span>Subtítulo de Seção<span class="kw">&lt;/h2&gt;</span>
+<span class="kw">&lt;h3&gt;</span>Sub-subtítulo<span class="kw">&lt;/h3&gt;</span>
+<span class="kw">&lt;p&gt;</span>Um parágrafo de texto normal.<span class="kw">&lt;/p&gt;</span></div>
+    </div>
+
+    <div class="resultado-visual">
+            <h1>Título Principal</h1>
+            <h2>Subtítulo de Seção</h2>
+            <h3>Sub-subtítulo</h3>
+            <p>Um parágrafo de texto normal.</p>
+        </div>
+
+    <!-- ── 5 ── -->
+    <div class="topico" id="t5">
+        <div class="topico-header">
+            <div class="num">05</div>
+            <h2>Formatação de texto</h2>
+        </div>
+        <p>Existem várias tags para formatar texto com diferentes significados:</p>
+
+        <h3>Negrito e itálico</h3>
+        <ul>
+            <li><span class="tag">&lt;strong&gt;</span> — negrito com significado semântico (texto importante). Use sempre que possível.</li>
+            <li><span class="tag">&lt;b&gt;</span> — negrito apenas visual, sem indicar importância</li>
+            <li><span class="tag">&lt;em&gt;</span> — itálico com ênfase semântica</li>
+        </ul>
+
+        <h3>Outras tags de formatação</h3>
+        <ul>
+            <li><span class="tag">&lt;br&gt;</span> — quebra de linha (não tem tag de fechamento)</li>
+            <li><span class="tag">&lt;abbr title="..."&gt;</span> — define uma abreviação; o texto do atributo <span class="tag">title</span> aparece como dica ao passar o mouse</li>
+        </ul>
+
+        <h3>Comentários</h3>
+        <p>Comentários são escritos com <span class="tag">&lt;!-- texto --&gt;</span> e não aparecem na página — servem apenas como anotações para o programador.</p>
+
+        <div class="code-block"><span class="kw">&lt;strong&gt;</span>Texto importante<span class="kw">&lt;/strong&gt;</span>
+<span class="kw">&lt;em&gt;</span>Texto com ênfase<span class="kw">&lt;/em&gt;</span>
+Texto com<span class="kw">&lt;br&gt;</span>quebra de linha
+<span class="kw">&lt;abbr</span> <span class="attr">title</span>=<span class="val">"HyperText Markup Language"</span><span class="kw">&gt;</span>HTML<span class="kw">&lt;/abbr&gt;</span>
+<span class="cmt">&lt;!-- Isso é um comentário --&gt;</span></div>
+    </div>
+
+    <div class="resultado-visual">
+            <p><strong>Texto importante</strong></p>
+            <p><em>Texto com ênfase</em></p>
+            <p>Texto com<br>quebra de linha</p>
+            <p><abbr title="HyperText Markup Language" style="text-decoration: underline dotted; cursor: help;">HTML</abbr> (Passe o mouse por cima)</p>
+        </div>
+
+    <!-- ── 6 ── -->
+    <div class="topico" id="t6">
+        <div class="topico-header">
+            <div class="num">06</div>
+            <h2>Links e imagens</h2>
+        </div>
+
+        <h3>Links — &lt;a&gt;</h3>
+        <p>O <span class="tag">&lt;a href="..."&gt;</span> cria um link clicável. Atributos principais:</p>
+        <ul>
+            <li><span class="tag">href</span> — endereço de destino do link</li>
+            <li><span class="tag">target="_blank"</span> — abre o link em uma nova aba</li>
+        </ul>
+
+        <h3>Imagens — &lt;img&gt;</h3>
+        <p>A tag <span class="tag">&lt;img&gt;</span> exibe uma imagem e <strong>não tem tag de fechamento</strong>. Atributos principais:</p>
+        <ul>
+            <li><span class="tag">src</span> — caminho ou URL da imagem</li>
+            <li><span class="tag">alt</span> — texto alternativo (exibido se a imagem não carregar; lido por leitores de tela)</li>
+            <li><span class="tag">width</span> — largura em pixels</li>
+        </ul>
+
+        <h3>Legenda — &lt;figure&gt; e &lt;figcaption&gt;</h3>
+        <p>O <span class="tag">&lt;figure&gt;</span> envolve a imagem e o <span class="tag">&lt;figcaption&gt;</span> adiciona uma legenda abaixo. O <span class="tag">&lt;figcaption&gt;</span> <strong>precisa estar dentro</strong> de um <span class="tag">&lt;figure&gt;</span>.</p>
+
+        <div class="code-block"><span class="kw">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://google.com"</span> <span class="attr">target</span>=<span class="val">"_blank"</span><span class="kw">&gt;</span>Abrir no Google<span class="kw">&lt;/a&gt;</span>
+
+<span class="kw">&lt;figure&gt;</span>
+  <span class="kw">&lt;img</span> <span class="attr">src</span>=<span class="val">"foto.png"</span> <span class="attr">alt</span>=<span class="val">"Descrição da imagem"</span> <span class="attr">width</span>=<span class="val">"300"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;figcaption&gt;</span>Legenda da imagem<span class="kw">&lt;/figcaption&gt;</span>
+<span class="kw">&lt;/figure&gt;</span></div>
+    </div>
+
+    <div class="resultado-visual">
+            <p><a href="https://google.com" target="_blank" style="color: blue; text-decoration: underline;">Abrir no Google</a></p>
+            <figure style="margin: 15px 0; border: 1px solid #ddd; padding: 10px; width: fit-content; background: #fafafa;">
+                <!-- Usando uma imagem de placeholder para exemplificar -->
+                <img src="https://placehold.co/300x150/e0e0e0/666666?text=Imagem+de+Exemplo" alt="Descrição da imagem" width="300">
+                <figcaption style="font-size: 0.9rem; color: #555; text-align: center; margin-top: 5px;">Legenda da imagem</figcaption>
+            </figure>
+        </div>
+
+    <!-- ── 7 ── -->
+    <div class="topico" id="t7">
+        <div class="topico-header">
+            <div class="num">07</div>
+            <h2>Formulários</h2>
+        </div>
+        <p>O <span class="tag">&lt;form&gt;</span> agrupa todos os campos de um formulário. Dentro dele ficam os inputs — campos onde o usuário interage.</p>
+
+        <h3>Tipos de &lt;input&gt;</h3>
+        <p>O comportamento do <span class="tag">&lt;input&gt;</span> muda completamente com o atributo <span class="tag">type</span>:</p>
+
+        <div class="input-grid">
+            <div class="input-card"><div class="type">type="text"</div><div class="desc">Campo de texto livre</div></div>
+            <div class="input-card"><div class="type">type="password"</div><div class="desc">Esconde o que é digitado</div></div>
+            <div class="input-card"><div class="type">type="email"</div><div class="desc">Valida formato de e-mail</div></div>
+            <div class="input-card"><div class="type">type="number"</div><div class="desc">Apenas números (min/max)</div></div>
+            <div class="input-card"><div class="type">type="url"</div><div class="desc">Valida formato de URL</div></div>
+            <div class="input-card"><div class="type">type="radio"</div><div class="desc">Escolha única do grupo</div></div>
+            <div class="input-card"><div class="type">type="checkbox"</div><div class="desc">Marcar múltiplas opções</div></div>
+            <div class="input-card"><div class="type">type="file"</div><div class="desc">Upload de arquivo</div></div>
+            <div class="input-card"><div class="type">type="date"</div><div class="desc">Calendário de data</div></div>
+            <div class="input-card"><div class="type">type="time"</div><div class="desc">Seletor de horário</div></div>
+            <div class="input-card"><div class="type">type="month"</div><div class="desc">Seletor de mês/ano</div></div>
+            <div class="input-card"><div class="type">type="week"</div><div class="desc">Seletor de semana</div></div>
+            <div class="input-card"><div class="type">type="range"</div><div class="desc">Barra deslizante (slider)</div></div>
+            <div class="input-card"><div class="type">type="color"</div><div class="desc">Seletor de cor</div></div>
+            <div class="input-card"><div class="type">type="submit"</div><div class="desc">Botão de envio</div></div>
+        </div>
+
+        <h3>Atributos importantes do &lt;input&gt;</h3>
+        <ul>
+            <li><span class="tag">placeholder</span> — texto cinza de dica quando o campo está vazio</li>
+            <li><span class="tag">id</span> — identificador único do elemento</li>
+            <li><span class="tag">name</span> — nome do campo ao enviar o formulário</li>
+            <li><span class="tag">value</span> — valor do campo</li>
+        </ul>
+
+        <h3>Outros elementos de formulário</h3>
+        <ul>
+            <li><span class="tag">&lt;label for="id"&gt;</span> — texto clicável que ativa o input correspondente</li>
+            <li><span class="tag">&lt;textarea&gt;</span> — campo de texto longo (atributos <span class="tag">rows</span> e <span class="tag">cols</span>)</li>
+            <li><span class="tag">&lt;select&gt;</span> + <span class="tag">&lt;option&gt;</span> — menu suspenso</li>
+            <li><span class="tag">&lt;fieldset&gt;</span> — agrupa campos com uma borda ao redor</li>
+            <li><span class="tag">&lt;legend&gt;</span> — título do fieldset, aparece na borda superior</li>
+        </ul>
+
+        <div class="code-block"><span class="kw">&lt;form&gt;</span>
+  <span class="kw">&lt;fieldset&gt;</span>
+    <span class="kw">&lt;legend&gt;</span>Dados pessoais<span class="kw">&lt;/legend&gt;</span>
+
+    <span class="kw">&lt;label</span> <span class="attr">for</span>=<span class="val">"nome"</span><span class="kw">&gt;</span>Nome:<span class="kw">&lt;/label&gt;</span>
+    <span class="kw">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">id</span>=<span class="val">"nome"</span> <span class="attr">name</span>=<span class="val">"nome"</span> <span class="attr">placeholder</span>=<span class="val">"Seu nome..."</span><span class="kw">&gt;</span>
+
+    <span class="kw">&lt;select</span> <span class="attr">name</span>=<span class="val">"opcao"</span><span class="kw">&gt;</span>
+      <span class="kw">&lt;option</span> <span class="attr">value</span>=<span class="val">"a"</span><span class="kw">&gt;</span>Opção A<span class="kw">&lt;/option&gt;</span>
+    <span class="kw">&lt;/select&gt;</span>
+
+    <span class="kw">&lt;input</span> <span class="attr">type</span>=<span class="val">"submit"</span> <span class="attr">value</span>=<span class="val">"Enviar"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;/fieldset&gt;</span>
+<span class="kw">&lt;/form&gt;</span></div>
+    </div>
+
+    <div class="resultado-visual">
+            <form onsubmit="event.preventDefault();">
+                <fieldset>
+                    <legend>Dados pessoais</legend>
+                    
+                    <label for="ex-nome">Nome:</label>
+                    <input type="text" id="ex-nome" name="nome" placeholder="Seu nome..."><br>
+                    
+                    <label for="ex-opcao">Opção:</label>
+                    <select id="ex-opcao" name="opcao">
+                        <option value="a">Opção A</option>
+                        <option value="b">Opção B</option>
+                    </select><br>
+                    
+                    <input type="submit" value="Enviar" style="margin-top: 10px; padding: 5px 15px; cursor: pointer;">
+                </fieldset>
+            </form>
+        </div>
+
+    <!-- ── 8 ── -->
+    <div class="topico" id="t8">
+        <div class="topico-header">
+            <div class="num">08</div>
+            <h2>Tabelas</h2>
+        </div>
+        <p>As tabelas são criadas com a tag <span class="tag">&lt;table&gt;</span> e divididas em três partes semânticas:</p>
+        <ul>
+            <li><span class="tag">&lt;thead&gt;</span> — cabeçalho da tabela</li>
+            <li><span class="tag">&lt;tbody&gt;</span> — corpo com os dados</li>
+            <li><span class="tag">&lt;tfoot&gt;</span> — rodapé da tabela</li>
+        </ul>
+
+        <h3>Células</h3>
+        <ul>
+            <li><span class="tag">&lt;tr&gt;</span> — cria uma linha</li>
+            <li><span class="tag">&lt;th&gt;</span> — célula de cabeçalho (negrito e centralizado automaticamente)</li>
+            <li><span class="tag">&lt;td&gt;</span> — célula normal de dados</li>
+            <li><span class="tag">colspan="N"</span> — faz uma célula ocupar o espaço de N colunas</li>
+        </ul>
+
+        <div class="code-block"><span class="kw">&lt;table&gt;</span>
+  <span class="kw">&lt;thead&gt;</span>
+    <span class="kw">&lt;tr&gt;</span>
+      <span class="kw">&lt;th&gt;</span>Coluna 1<span class="kw">&lt;/th&gt;</span>  <span class="kw">&lt;th&gt;</span>Coluna 2<span class="kw">&lt;/th&gt;</span>
+    <span class="kw">&lt;/tr&gt;</span>
+  <span class="kw">&lt;/thead&gt;</span>
+  <span class="kw">&lt;tbody&gt;</span>
+    <span class="kw">&lt;tr&gt;</span>
+      <span class="kw">&lt;td&gt;</span>Dado A<span class="kw">&lt;/td&gt;</span>  <span class="kw">&lt;td&gt;</span>Dado B<span class="kw">&lt;/td&gt;</span>
+    <span class="kw">&lt;/tr&gt;</span>
+  <span class="kw">&lt;/tbody&gt;</span>
+  <span class="kw">&lt;tfoot&gt;</span>
+    <span class="kw">&lt;tr&gt;</span>
+      <span class="kw">&lt;td</span> <span class="attr">colspan</span>=<span class="val">"2"</span><span class="kw">&gt;</span>Rodapé<span class="kw">&lt;/td&gt;</span>
+    <span class="kw">&lt;/tr&gt;</span>
+  <span class="kw">&lt;/tfoot&gt;</span>
+<span class="kw">&lt;/table&gt;</span></div>
+    </div>
+
+    <div class="resultado-visual">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Coluna 1</th>
+                        <th>Coluna 2</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Dado A</td>
+                        <td>Dado B</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2" style="text-align: center; font-style: italic;">Rodapé</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+    <!-- ── 9 ── -->
+    <div class="topico" id="t9">
+        <div class="topico-header">
+            <div class="num">09</div>
+            <h2>Listas</h2>
+        </div>
+        <p>O HTML tem dois tipos de lista. Em ambos os casos, cada item é marcado com <span class="tag">&lt;li&gt;</span>.</p>
+        <ul>
+            <li><span class="tag">&lt;ol&gt;</span> — lista <strong>ordenada</strong>, os itens são numerados automaticamente</li>
+            <li><span class="tag">&lt;ul&gt;</span> — lista <strong>não ordenada</strong>, os itens aparecem com bolinhas</li>
+        </ul>
+
+        <div class="code-block"><span class="kw">&lt;ol&gt;</span>
+  <span class="kw">&lt;li&gt;</span>Primeiro item<span class="kw">&lt;/li&gt;</span>
+  <span class="kw">&lt;li&gt;</span>Segundo item<span class="kw">&lt;/li&gt;</span>
+<span class="kw">&lt;/ol&gt;</span>
+
+<span class="kw">&lt;ul&gt;</span>
+  <span class="kw">&lt;li&gt;</span>Item sem ordem<span class="kw">&lt;/li&gt;</span>
+  <span class="kw">&lt;li&gt;</span>Outro item<span class="kw">&lt;/li&gt;</span>
+<span class="kw">&lt;/ul&gt;</span></div>
+    </div>
+
+    <div class="resultado-visual">
+            <ol>
+                <li>Primeiro item</li>
+                <li>Segundo item</li>
+            </ol>
+            <br>
+            <ul>
+                <li>Item sem ordem</li>
+                <li>Outro item</li>
+            </ul>
+        </div> 
+
+    <!-- ── 10 ── -->
+    <div class="topico" id="t10">
+        <div class="topico-header">
+            <div class="num">10</div>
+            <h2>Conteúdo expansível e outros elementos</h2>
+        </div>
+
+        <h3>&lt;details&gt; e &lt;summary&gt;</h3>
+        <p>O <span class="tag">&lt;details&gt;</span> cria um bloco que pode ser <strong>aberto e fechado com um clique</strong> pelo usuário. O <span class="tag">&lt;summary&gt;</span> define o texto clicável que aparece como título.</p>
+
+        <h3>&lt;span&gt;</h3>
+        <p>O <span class="tag">&lt;span&gt;</span> é um container <strong>inline</strong> (não quebra linha). É usado para envolver um trecho de texto para aplicar estilos com CSS ou capturar valores com JavaScript.</p>
+
+        <h3>Entidades HTML</h3>
+        <p>São códigos especiais para representar caracteres que o HTML reserva ou que não podem ser digitados diretamente:</p>
+        <ul>
+            <li><span class="tag">&amp;copy;</span> → © (símbolo de copyright)</li>
+            <li><span class="tag">&amp;lt;</span> → &lt; (menor que, pois o sinal bruto seria interpretado como tag)</li>
+            <li><span class="tag">&amp;gt;</span> → &gt; (maior que)</li>
+            <li><span class="tag">&amp;amp;</span> → &amp; (e comercial)</li>
+        </ul>
+
+        <div class="code-block"><span class="kw">&lt;details&gt;</span>
+  <span class="kw">&lt;summary&gt;</span>Clique para ver mais<span class="kw">&lt;/summary&gt;</span>
+  <span class="kw">&lt;p&gt;</span>Conteúdo escondido que aparece ao clicar.<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;/details&gt;</span>
+
+<span class="kw">&lt;p&gt;</span>Dificuldade: <span class="kw">&lt;span</span> <span class="attr">id</span>=<span class="val">"valor"</span><span class="kw">&gt;</span>5<span class="kw">&lt;/span&gt;</span>/10<span class="kw">&lt;/p&gt;</span>
+
+<span class="kw">&lt;footer&gt;</span>
+  <span class="kw">&lt;p&gt;</span>&amp;copy; 2026 Meu Site<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;/footer&gt;</span></div>
+
+        <div class="dica"><strong>💡 Dica:</strong> O <span class="tag">&lt;span&gt;</span> sozinho não faz nada visualmente — ele é uma "caixa invisível" que só tem utilidade quando combinado com CSS ou JavaScript.</div>
+    </div>
+
+    <div class="resultado-visual">
+            <details style="margin-bottom: 15px; cursor: pointer;">
+                <summary style="font-weight: bold;">Clique para ver mais</summary>
+                <p style="margin-top: 10px; padding-left: 15px; border-left: 3px solid #ccc;">Conteúdo escondido que aparece ao clicar.</p>
+            </details>
+
+            <p>Dificuldade: <span id="valor" style="color: red; font-weight: bold;">5</span>/10</p>
+
+            <footer style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #eee;">
+                <p>&copy; 2026 Meu Site</p>
+            </footer>
+        </div>
+
+    <!-- BANNER DE LINKS -->
+    <div class="link-banner">
+        <h2>Continue seus estudos 🚀</h2>
+        <p>Agora que você domina o HTML, explore os outros materiais do curso:</p>
+        <div class="links">
+            <a href="guia_css.html" class="l-css">🎨 Guia de CSS</a>
+            <a href="index.html" class="l-quiz">📝 Praticar com o Quiz</a>
+        </div>
+    </div>
+
+</main>
+
+<footer>
+    <p>&copy; 2026 Guias de Web Dev — Bons estudos!</p>
+</footer>
+
+</body>
+</html>
